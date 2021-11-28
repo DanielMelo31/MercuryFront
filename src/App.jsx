@@ -1,21 +1,19 @@
-import './App.css';
-import { Index } from './pages/Index';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Contact } from './pages/Contact';
-import { User } from './graphql/users/user';
 import {
 	ApolloClient,
 	InMemoryCache,
 	ApolloProvider,
-	createHttpLink,
 	HttpLink,
 } from '@apollo/client';
+import { Users } from 'pages/usuarios/user';
+import './styles/tables.css';
+import { UserEdit } from 'pages/usuarios/userEdit';
 
 
 const client = new ApolloClient({
 	cache: new InMemoryCache(),
 	link: new HttpLink({
-		uri: 'https://backen-mercury.herokuapp.com/graphql',
+		uri: 'http://localhost:8080/graphql',
 	}),
 });
 
@@ -24,11 +22,9 @@ function App() {
 		<ApolloProvider client={client}>
 			<BrowserRouter>
 				<Routes>
-					<Route path="/" element={<Index />} />
-					<Route path="/contact" element={<Contact />} />
-
 					{/* Users Routes */}
-					<Route path="/users" element={<User />} />
+					<Route path="/users" element={<Users />} />
+					<Route path="/users/edit/:id" element={<UserEdit />} />
 				</Routes>
 			</BrowserRouter>
 		</ApolloProvider>
