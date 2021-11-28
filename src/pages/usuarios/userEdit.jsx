@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 import Input from 'componets/Input';
 import ButtonLoading from 'componets/ButtonLoading';
 import useFormData from 'hooks/useFormData';
-import { EDITAR_USUARIO } from 'graphql/mutation';
+import { EDITAR_USUARIO } from 'graphql/usuario/mutation';
+import DropDown from 'componets/Dropdown';
+import { Enum_Rol, Enum_EstadoUsuario } from 'utils/enums';
 
 const UserEdit = () => {
 	const { id } = useParams(); //Get url param (ID)
@@ -35,8 +37,6 @@ const UserEdit = () => {
 			variables: {
 				_id:id,
 				...formData,
-				rol: 'ADMINISTRADOR',
-				estado:'PENDIENTE'
 			},
 		});
 	};
@@ -92,13 +92,20 @@ const UserEdit = () => {
 						defaultValue={queryData.Usuario.identificacion}
 						required={true}
 					/>
-					{/* <DropDown
+					<DropDown
 						label="Rol de la persona:"
 						name="rol"
-						defaultValue={userData.rol}
+						defaultValue={queryData.Usuario.rol}
 						required={true}
 						options={Enum_Rol}
-					/> */}
+					/>
+					<DropDown
+						label="Estado de la solicitud:"
+						name="estado"
+						defaultValue={queryData.Usuario.estado}
+						required={true}
+						options={Enum_EstadoUsuario}
+					/>
 					<ButtonLoading disabled={false} loading={false} text="Confirmar" />
 				</form>
 			</div>

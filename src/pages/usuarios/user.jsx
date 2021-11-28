@@ -2,6 +2,8 @@ import { useQuery } from '@apollo/client';
 import { React, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GET_USERS } from 'graphql/usuario/queries';
+import { Enum_Rol } from 'utils/enums';
+import { Enum_EstadoUsuario } from 'utils/enums';
 
 const Users = () => {
 	const { data, loading, error } = useQuery(GET_USERS);
@@ -19,6 +21,7 @@ const Users = () => {
 						<th>Correo</th>
 						<th>Identificacion</th>
 						<th>Rol</th>
+						<th>Estado</th>
 						<th>Acciones</th>
 					</tr>
 				</thead>
@@ -31,7 +34,8 @@ const Users = () => {
 									<td>{user.apellido}</td>
 									<td>{user.correo}</td>
 									<td>{user.identificacion}</td>
-									<td>{user.rol.toLowerCase()}</td>
+									<td>{Enum_Rol[user.rol]}</td>
+									<td>{Enum_EstadoUsuario[user.estado]}</td>
 									<td>
 										<Link to={`/users/edit/${user._id}`}>
 											<i className="far fa-edit"></i>

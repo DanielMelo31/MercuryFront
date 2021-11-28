@@ -7,8 +7,11 @@ import {
 } from '@apollo/client';
 import { Users } from 'pages/usuarios/user';
 import './styles/tables.css';
+import './styles/defaultInputs.css'
+import './styles/globals.css'
 import { UserEdit } from 'pages/usuarios/userEdit';
-
+import { AuthLayout } from 'layouts/AuthLayout';
+import { Register } from 'pages/auth/register';
 
 const client = new ApolloClient({
 	cache: new InMemoryCache(),
@@ -25,6 +28,9 @@ function App() {
 					{/* Users Routes */}
 					<Route path="/users" element={<Users />} />
 					<Route path="/users/edit/:id" element={<UserEdit />} />
+					<Route path="/auth" element={<AuthLayout />}>
+						<Route path="register" element={<Register />} />
+					</Route>
 				</Routes>
 			</BrowserRouter>
 		</ApolloProvider>
