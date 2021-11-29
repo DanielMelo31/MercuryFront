@@ -30,4 +30,13 @@ const EDITAR_USUARIO = gql`
 	}
 `;
 
-export { EDITAR_USUARIO };
+const LOGIN = gql`
+	mutation Login($correo: String!, $password: String!) {
+		login(correo: $correo, password: $password) {
+			token
+			error
+		}
+	}
+`;
+
+export { EDITAR_USUARIO, LOGIN };
