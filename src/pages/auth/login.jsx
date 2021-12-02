@@ -5,8 +5,12 @@ import { Link } from 'react-router-dom';
 import useFormData from '../../hooks/useFormData';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from 'graphql/usuario/mutation';
+import { useNavigate } from 'react-router';
+import { useAuth } from 'context/AuthContext';
 
 const Login = () => {
+	const { setToken } = useAuth();
+	const navigate = useNavigate();
 	const { form, formData, updateFormData } = useFormData();
 
 	const [
@@ -22,8 +26,12 @@ const Login = () => {
 	};
 
 	useEffect(() => {
+		console.log(mutationData);
 		if (mutationData) {
-			console.log(mutationData);
+			if (mutationData.login.token) {
+				setToken(mutationData.login.token);
+				navigate('/');
+			}
 		}
 	}, [mutationData]);
 

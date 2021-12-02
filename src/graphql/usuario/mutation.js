@@ -39,4 +39,13 @@ const LOGIN = gql`
 	}
 `;
 
-export { EDITAR_USUARIO, LOGIN };
+const REFRESH_TOKEN = gql`
+	mutation refreshToken {
+		refreshToken {
+			token
+			error
+		}
+	}
+`;
+
+export { EDITAR_USUARIO, LOGIN, REFRESH_TOKEN };
